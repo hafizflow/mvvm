@@ -2,12 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:mvvm/data/app_exceptions.dart';
-import 'package:mvvm/data/network/network_api_service.dart';
 import 'package:http/http.dart' as http;
 
 import 'base_api_services.dart';
 
 class NetworkApiService extends BaseApiServices {
+  // get request
   @override
   Future getGetApiService(String url) async {
     dynamic responseData;
@@ -24,6 +24,7 @@ class NetworkApiService extends BaseApiServices {
     return responseData;
   }
 
+  // post request
   @override
   Future getPostApiService(String url, dynamic data) async {
     dynamic responseData;
@@ -41,6 +42,7 @@ class NetworkApiService extends BaseApiServices {
     return responseData;
   }
 
+  // response handle
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:

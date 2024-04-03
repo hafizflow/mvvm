@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm/utils/routes/routes_name.dart';
+import 'package:mvvm/utils/utils.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -14,7 +15,10 @@ class LoginScreen extends StatelessWidget {
         child: ElevatedButton(
           child: const Text('HomePage'),
           onPressed: () {
-            Navigator.pushNamed(context, RoutesName.home);
+            // Navigator.pushNamed(context, RoutesName.home);
+            // Utils.toastMessage('No Internet Connection');
+            // Utils.snackBar('No internet connection', context);
+            // Utils.flushBar('No internet connection', context);
           },
         ),
       ),
