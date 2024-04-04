@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm/resorces/components/custom_elevated_button.dart';
+import 'package:mvvm/utils/routes/routes_name.dart';
+import 'package:mvvm/view_model/services/user_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,8 +17,17 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: const Column(
-        children: [],
+      body: Padding(
+        padding: const EdgeInsets.all(60.0),
+        child: Center(
+          child: CustomElevatedButton(
+            title: 'Log Out',
+            onPressed: () {
+              UserService().removeToken();
+              Navigator.pushReplacementNamed(context, RoutesName.login);
+            },
+          ),
+        ),
       ),
     );
   }

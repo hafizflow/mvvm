@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm/model/user_model.dart';
 import 'package:mvvm/resorces/components/custom_elevated_button.dart';
 import 'package:mvvm/utils/utils.dart';
 import 'package:mvvm/view_model/auth_view_model.dart';
+import 'package:mvvm/view_model/services/user_service.dart';
 import 'package:provider/provider.dart';
 
 import '../resorces/components/custom_text_field.dart';

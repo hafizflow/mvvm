@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:mvvm/repository/auth_repository.dart';
 import 'package:mvvm/utils/routes/routes_name.dart';
 
@@ -18,10 +15,11 @@ class AuthViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loginApi(dynamic data, BuildContext context) async {
+  loginApi(dynamic data, BuildContext context) {
     setLoading(true);
     _myRepository.loginApi(data).then((value) {
       setLoading(false);
+      // UserService().setToken(value.toString());
       Navigator.pushNamed(context, RoutesName.home);
       Utils.flushBar('Login Successful', context);
     }).onError((error, stackTrace) {

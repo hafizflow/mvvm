@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:mvvm/data/app_exceptions.dart';
 import 'package:http/http.dart' as http;
 
+import '../../view_model/services/user_service.dart';
 import 'base_api_services.dart';
 
 class NetworkApiService extends BaseApiServices {
@@ -35,6 +37,9 @@ class NetworkApiService extends BaseApiServices {
           .timeout(const Duration(seconds: 10));
 
       responseData = returnResponse(response);
+      UserService().setToken(responseData.toString());
+
+      log('Token: $responseData');
     } on SocketException {
       throw FetchDataException('No Internet Connection');
     }
