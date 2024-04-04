@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm/resorces/components/custom_elevated_button.dart';
+import 'package:mvvm/utils/utils.dart';
+import 'package:mvvm/view_model/auth_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../resorces/components/custom_text_field.dart';
 
@@ -18,6 +21,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authViewModel = Provider.of<AuthViewModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
@@ -28,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomTextField(
-              controller: _passwordController,
+              controller: _emailController,
               hintText: "Email",
               label: "Email",
               prefixIcon: Icons.email_outlined,
@@ -38,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ValueListenableBuilder(
               builder: (context, value, _) {
                 return CustomTextField(
-                  controller: _emailController,
+                  controller: _passwordController,
                   hintText: "Password",
                   label: "Password",
                   prefixIcon: Icons.lock_outlined,
@@ -57,8 +62,23 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 16),
             CustomElevatedButton(
               title: 'Login',
-              loading: false,
-              onPressed: () {},
+              loading: authViewModel.loading,
+              onPressed: () {
+                if (_emailController.text.isEmpty) {
+                  Utils.flushBar('Please enter email', context);
+                } else if (_passwordController.text.isEmpty) {
+                  Utils.flushBar('Please enter password', context);
+                } else if (_passwordController.text.length < 6) {
+                  Utils.flushBar(
+                      'Password must be more then 6 character', context);
+                } else {
+                  Map data = {
+                    'email': _emailController.text.trim(),
+                    'password': _passwordController.text,
+                  };
+                  authViewModel.loginApi(data, context);
+                }
+              },
             )
           ],
         ),

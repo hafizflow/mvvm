@@ -19,6 +19,7 @@ class Utils {
         duration: const Duration(seconds: 2),
         margin: const EdgeInsets.symmetric(horizontal: 24),
         borderRadius: BorderRadius.circular(12),
+        backgroundColor: Colors.teal,
       )..show(context),
     );
   }
